@@ -131,7 +131,7 @@ const extratoDeTransacoes = async (req, res) => {
         const { rows, rowCount } = await conexao.query(queryEntradaSaida, [usuario.id]);
         
         if (rowCount === 0) {
-            return res.status(404).json({'Entrada': tipoEntrada, 'Saida': tipoSaida})
+            return res.status(404).json({'sntrada': tipoEntrada, 'saida': tipoSaida})
         };
         
         
