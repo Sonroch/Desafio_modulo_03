@@ -20,8 +20,10 @@ const transacoesUsuarioLogado = async (req, res) => {
     const { usuario } = req;
 
     try {
-        const queryTransacaoLogado = 'SELECT * FROM transacoes WHERE usuario_id = $1';
-        const listaDeTransacoes = await conexao.query(queryTransacaoLogado, [usuario.id]);
+        
+        const query = `SELECT t.id, t.descricao, t.valor, t.data, t.usuario_id, t.categoria_id, t.tipo, c.descricao AS categoria_nome 
+        FROM transacoes AS t JOIN categorias AS c on categoria_id = c.id WHERE usuario_id = $1`
+               const listaDeTransacoes = await conexao.query(query, [usuario.id]);
         return res.status(200).json(listaDeTransacoes.rows);
     } catch (e) {
         return res.status(400).json(e.message);
