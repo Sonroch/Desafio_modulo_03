@@ -1,6 +1,6 @@
-const { Pool } = require("pg");
-
-const pool = new Pool({
+const knex = require('knex')({
+    client: "pg",
+    connection:{
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
@@ -10,11 +10,9 @@ const pool = new Pool({
         rejectUnauthorized: false,
     },
 
-});
+}});
 
-const query = (text, param) => {
-    return pool.query(text, param);
-};
 
-module.exports = { query }
+
+module.exports = knex
 
